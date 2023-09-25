@@ -13,3 +13,87 @@ The general format:
 - **MINOR** version when you add functionality in a backward compatible manner
 - **PATCH** version when you make backward compatible bug fixes
 
+### Considerations for Linux Distribution
+
+This project is built against ubuntu.
+Please consider checking your Linux Distribution and change accordingly to
+distribution needs.
+
+[How to Check OS Version in Linux](https://www.cyberciti.biz/faq/how-to-check-os-version-in-linux-command-line/)
+
+Example of Checking OS Version:
+
+```
+$ cat /etc/os-release
+
+PRETTY_NAME="Ubuntu 22.04.3 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.3 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+
+```
+
+### Refactoring into Bash Scripts
+
+While fixing the Terraform CLI gpg drepeciation issues we noticed the bash scripts
+steps were a considerable amount of more code. So we decided to create a bash script
+to install the Terraform CLI.
+
+This bash script is located here: [./bin/install_terraform_cli](./bin/install_terraform_cli)
+
+- This will keep the Gitpod Tak file ([.gitpod.yml](.gitpod.yml)) tidy.
+- This will allow us an easier way to debug and execute manually Terraform CLI install
+- This will allow better portability for other projects that need to install Terraform
+CLI.
+
+### Shebang Considerations
+
+A shebang (pronouned Sha-bang) tells the bash script what program that will interpret the script. e.g. `#!/bin/bash`
+
+ChatGPT recommended this format for bash: `#!/usr/bin/env bash`
+
+- For portability for different OS distribution
+- Will search the user's PATH for the bash executable
+
+http://en.wikipedia.org/wiki/sShebang_(unix)
+
+### Execution Considerations
+
+When executing the bash script we can use the `./` shorthand notation to execute the bash script.
+
+eg. `./bin/install_terraform_cli`
+
+If we are using a script in .gitpod.yml we need to point the script to a program to interpret it.
+
+eg. `source ./bin/install_terraform_cli`
+
+### Linux Permissions Considerations
+
+In other to make our bash scripts executable we need to change linuc permission for the fix to be executable at the user mode
+
+```sh
+chmod u=x ./bin/install_terraform_cli
+```
+alternatively:
+
+```sh
+chmod 744 ./bin/install_terraform_cli
+```
+
+https://en.wikipedia.org/wiki/Chmod
+
+### Github Lifecycle (Before, Init, Command)
+
+We need to be carefull when using the Init becuase it will no re-run if we start an existing workspace.
+
+https://www.gitpod.io/docs/configure/workspaces/tasks
+
+
