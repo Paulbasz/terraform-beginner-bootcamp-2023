@@ -96,4 +96,13 @@ We need to be carefull when using the Init becuase it will no re-run if we start
 
 https://www.gitpod.io/docs/configure/workspaces/tasks
 
+### AWS CLI Installation
 
+AWS CLI is installed for this project via the bash script `[./bin/install_aws_cl](./bin/install_aws_cli)`
+
+[Getting started Install (AWS CLI)](https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip)
+
+We can check if our AWS CLI ceredentials is configured correctly by running the following  AWS CLI command:
+```sh
+aws sts get-caller identity
+```
