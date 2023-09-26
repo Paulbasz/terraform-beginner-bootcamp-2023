@@ -7,15 +7,23 @@ terraform {
   }
 }
 
+provider aws { 
+}
 provider "random" {
   # Configuration options
 }
 
 resource "random_string" "bucket_name" {
-  length           = 16
-  special          = false
+  lower   = true
+  upper = false
+  length  = 16
+  special = false
 }
 
+ resource "aws_s3_bucket" "example" {
+  bucket = random_string.bucket_name.result
+
+ }
 output "random_bucket_name" {
   value = random_string.bucket_name.result
 }
