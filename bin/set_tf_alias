@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 
-new_alias='alias tf="terraform"'
+# Check if the alias already exists in the .bash_profile
+grep -q 'alias tf="terraform"' ~/.bash_profile
 
-# Check if .bash_profile exists
-if [ -f ~/.bash_profile ]; then
-    # Check if the alias already exists in .bash_profile
-    if ! grep -q "$new_alias" ~/.bash_profile; then
-        # Add the alias to .bash_profile
-        echo -e "\n# Adding alias for Terraform" >> ~/.bash_profile
-        echo "$new_alias" >> ~/.bash_profile
-        echo "Alias added successfully. Please restart your terminal or run 'source ~/.bash_profile'."
-    else
-        echo "Alias already exists in .bash_profile."
-    fi
+# $? is a special variable in bash that holds the exit status of the last command executed
+if [ $? -ne 0 ]; then
+    # If the alias does not exist, append it
+    echo 'alias tf="terraform"' >> ~/.bash_profile
+    echo "Alias added successfully."
 else
-    echo "Error: .bash_profile not found. Please create one and run the script again."
+    # Inform the user if the alias already exists
+    echo "Alias already exists in .bash_profile."
 fi
+
+# Optional: source the .bash_profile to make the alias available immediately
+source ~/.bash_profile
