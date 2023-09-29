@@ -2,9 +2,8 @@ tasks:
   - name: terraform
     before: |
 <<<<<<< Updated upstream
-      source ./bin/install_terraofrm_cli
-=======
       source ./bin/install_terraform_cli
+=======
       source ./bin/generate_tfrc_credentials
 >>>>>>> Stashed changes
   - name: aws-cli
