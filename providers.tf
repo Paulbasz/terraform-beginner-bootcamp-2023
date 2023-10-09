@@ -1,13 +1,19 @@
 terraform {
+  #backend "remote" {
+  #  hostname = "app.terraform.io"
+  #  organization = "Terraform-beginner-bootcamping"
 
- cloud {
-   organization = "Terraform-beginner-bootcamping"
-
-   workspaces {
-     name = "Terra-state-13"
-    }
-  }
-    required_providers {
+  #  workspaces {
+  #    name = "Terra-house-13"
+  #  }
+  #}
+   #cloud {
+    # organization = "Terraform-beginner-bootcamping"
+     #workspaces {
+      # name = "Terra-state-13"
+     #}
+  #}
+  required_providers {
     random = {
       source = "hashicorp/random"
       version = "3.5.1"
@@ -17,11 +23,9 @@ terraform {
       version = "5.16.2"
     }
   }
-
 }
 
-provider aws { 
-  
+provider "aws" {
 }
 provider "random" {
   # Configuration options
