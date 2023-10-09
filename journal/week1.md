@@ -50,6 +50,8 @@ This is the default file to load in terraform variables in blunk
 
 - TODO: document which terraform variables takes presendence.
 
+=======
+
 ## Dealing With Configuration Drift
 
 ## What happens if we lose our state file?
@@ -111,3 +113,4 @@ module "terrahouse_aws" {
 
 
 [Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
+
