@@ -1,0 +1,1 @@
+#fileset("${path.root}/public/assets","*.{jpg,png,gif}")
